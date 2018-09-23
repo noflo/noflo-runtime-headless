@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack --config spec/build/webpack.config.js",
     "pretest": "eslint src/*.js spec/**/*.js",
-    "test": "fbp-spec --address ws://localhost:3001 --command \"node src/main.js\" spec/*.yaml"
+    "test": "fbp-spec --address ws://localhost:3569 --command \"./bin/noflo-runtime-headless -f spec/dist/noflo.js\" spec/*.yaml"
+  },
+  "bin": {
+    "noflo-runtime-headless": "./bin/noflo-runtime-headless"
   },
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "webpack-cli": "^3.1.1"
   },
   "dependencies": {
+    "commander": "^2.18.0",
     "debug": "^4.0.1",
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
