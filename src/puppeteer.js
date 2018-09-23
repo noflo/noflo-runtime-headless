@@ -4,6 +4,7 @@ const debug = require('debug');
 
 const debugMessageSend = debug('noflo-runtime-headless:puppeteer:message:send');
 const debugMessageReceive = debug('noflo-runtime-headless:puppeteer:message:receive');
+const debugOutput = debug('noflo-runtime-headless:puppeteer:log');
 
 class BrowserRuntimeProxy extends EventEmitter {
   constructor(page) {
@@ -27,7 +28,7 @@ class BrowserRuntimeProxy extends EventEmitter {
 module.exports = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  page.on('console', msg => console.log('PAGE LOG:', msg.text()));
+  page.on('console', msg => debugOutput(msg.text()));
   await page.goto(url, {
     waitUntil: 'networkidle0',
   });
