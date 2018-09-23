@@ -26,7 +26,11 @@ class BrowserRuntimeProxy extends EventEmitter {
 }
 
 module.exports = async (url) => {
-  const browser = await puppeteer.launch();
+  const browserOptions = {};
+  if (process.env.CI) {
+    browserOptions.args = ['--no-sandbox'];
+  }
+  const browser = await puppeteer.launch(browserOptions);
   const page = await browser.newPage();
   page.on('console', msg => debugOutput(msg.text()));
   await page.goto(url, {
