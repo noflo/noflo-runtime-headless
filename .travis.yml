@@ -3,6 +3,5 @@ node_js:
 - lts/*
 script:
 - npx noflo-cache-preheat
-- npm install
 - npm run build
 - npm test
