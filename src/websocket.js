@@ -44,4 +44,4 @@ class WebSocketProxy extends EventEmitter {
   }
 }
 
-module.exports = httpServer => new WebSocketProxy(httpServer);
+module.exports = httpServer => Promise.resolve(new WebSocketProxy(httpServer));

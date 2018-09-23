@@ -9,9 +9,12 @@ process.on('SIGTERM', () => {
 });
 
 server(process.cwd(), 'spec/dist/noflo.js')(port)
-  .then(httpServer => websocket(httpServer))
-  .then(wsProxy => puppeteer(`http://localhost:${port}`, wsProxy))
-  .then(() => {
+  .then(httpServer => puppeteer(`http://localhost:${port}`)
+    .then(pageProxy => websocket(httpServer)
+      .then(wsProxy => [pageProxy, wsProxy])))
+  .then(([pageProxy, wsProxy]) => {
+    wsProxy.on('message', msg => pageProxy.send(msg));
+    pageProxy.on('message', msg => wsProxy.send(msg));
     console.log('Running!');
   })
   .catch((err) => {

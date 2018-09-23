@@ -1,19 +1,39 @@
 const puppeteer = require('puppeteer');
+const { EventEmitter } = require('events');
 const debug = require('debug');
 
 const debugMessageSend = debug('noflo-runtime-headless:puppeteer:message:send');
 const debugMessageReceive = debug('noflo-runtime-headless:puppeteer:message:receive');
 
-module.exports = async (url, wsProxy) => {
+class BrowserRuntimeProxy extends EventEmitter {
+  constructor(page) {
+    super();
+    this.page = page;
+  }
+
+  send(msg) {
+    debugMessageSend(msg);
+    return this.page.evaluate((m) => {
+      window.headlessRuntime.receive(m.protocol, m.command, m.payload, {});
+    }, msg);
+  }
+
+  receive(msg) {
+    debugMessageReceive(msg);
+    this.emit('message', msg);
+  }
+}
+
+module.exports = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   page.on('console', msg => console.log('PAGE LOG:', msg.text()));
   await page.goto(url, {
     waitUntil: 'networkidle0',
   });
+  const proxy = new BrowserRuntimeProxy(page);
   await page.exposeFunction('onRuntimeEvent', (msg) => {
-    debugMessageReceive(msg);
-    wsProxy.send(JSON.parse(msg));
+    proxy.receive(JSON.parse(msg));
   });
   await page.evaluate(() => {
     const runtime = window.require('noflo-runtime-postmessage');
@@ -34,10 +54,5 @@ module.exports = async (url, wsProxy) => {
       },
     });
   });
-  wsProxy.on('message', async (msg) => {
-    debugMessageSend(msg);
-    await page.evaluate((m) => {
-      window.headlessRuntime.receive(m.protocol, m.command, m.payload, {});
-    }, msg);
-  });
+  return proxy;
 };
