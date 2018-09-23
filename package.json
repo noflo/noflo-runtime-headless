@@ -4,8 +4,9 @@
   "description": "Tool for running NoFlo browser runtimes on headless browser from CLI",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --config spec/build/webpack.config.js",
     "pretest": "eslint src/*.js spec/**/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "fbp-spec --address ws://localhost:3001 --command \"node src/main.js\" spec/*.yaml"
   },
   "repository": {
     "type": "git",
