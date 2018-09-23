@@ -32,9 +32,19 @@ if (window) {
 
 ## Running
 
-TODO
+Start the runtime with:
+
+```shell
+$ npx noflo-runtime-headless --file path/to/my/file.js
+```
+
+You can also let fbp-spec start the runtime for you:
+
+```shell
+$ npx fbp-spec --address ws://localhost:3569 --command \"noflo-runtime-headless -f path/to/my/file.js\" spec/*.yaml
+```
 
 ## Changes
 
 * 0.1.0 (git master)
-  - Initial version, proof of concept
+  - Initial version
