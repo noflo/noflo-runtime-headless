@@ -1,4 +1,4 @@
-NoFlo headless runner
+NoFlo headless runner [![Build Status](https://travis-ci.org/noflo/noflo-runtime-headless.svg?branch=master)](https://travis-ci.org/noflo/noflo-runtime-headless)
 =====================
 
 This utility enables proxying NoFlo [postMessage runtimes](https://github.com/noflo/noflo-runtime-postmessage) running in a [headless browser](https://pptr.dev/) to the FBP protocol WebSocket transport.
