@@ -31,7 +31,7 @@ class WebSocketProxy extends EventEmitter {
       });
       connection.on('close', () => {
         debugConnection('Closed connection', subProtocol, request.origin);
-        this.connections = this.connections.filter(c => c !== connection);
+        this.connections = this.connections.filter((c) => c !== connection);
       });
     });
   }
@@ -44,4 +44,4 @@ class WebSocketProxy extends EventEmitter {
   }
 }
 
-module.exports = httpServer => Promise.resolve(new WebSocketProxy(httpServer));
+module.exports = (httpServer) => Promise.resolve(new WebSocketProxy(httpServer));

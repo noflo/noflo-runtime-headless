@@ -32,7 +32,7 @@ module.exports = async (url) => {
   }
   const browser = await puppeteer.launch(browserOptions);
   const page = await browser.newPage();
-  page.on('console', msg => debugOutput(msg.text()));
+  page.on('console', (msg) => debugOutput(msg.text()));
   await page.goto(url, {
     waitUntil: 'networkidle0',
   });
