@@ -15,7 +15,7 @@ module.exports = (root, nofloLib, options) => {
   app.use(router.allowedMethods());
   app.use(koaStatic(root, options));
   const httpServer = http.createServer(app.callback());
-  return port => new Promise((resolve, reject) => {
+  return (port) => new Promise((resolve, reject) => {
     httpServer.listen(port, (err) => {
       if (err) {
         reject(err);

@@ -13,12 +13,12 @@ exports.run = (options) => {
     opts.port = 3569;
   }
   return server(opts.root, opts.file)(opts.port)
-    .then(httpServer => puppeteer(`http://localhost:${opts.port}`)
-      .then(pageProxy => websocket(httpServer)
-        .then(wsProxy => [pageProxy, wsProxy])))
+    .then((httpServer) => puppeteer(`http://localhost:${opts.port}`)
+      .then((pageProxy) => websocket(httpServer)
+        .then((wsProxy) => [pageProxy, wsProxy])))
     .then(([pageProxy, wsProxy]) => {
-      wsProxy.on('message', msg => pageProxy.send(msg));
-      pageProxy.on('message', msg => wsProxy.send(msg));
+      wsProxy.on('message', (msg) => pageProxy.send(msg));
+      pageProxy.on('message', (msg) => wsProxy.send(msg));
       return true;
     });
 };
