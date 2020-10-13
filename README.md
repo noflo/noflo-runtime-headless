@@ -46,5 +46,7 @@ $ npx fbp-spec --address ws://localhost:3569 --command \"noflo-runtime-headless 
 
 ## Changes
 
+* 0.2.0 (Oct 13 2020)
+  - Released with updated dependencies
 * 0.1.0 (Sep 23 2018)
   - Initial version

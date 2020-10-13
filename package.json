@@ -1,6 +1,6 @@
 {
   "name": "noflo-runtime-headless",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tool for running NoFlo browser runtimes on headless browser from CLI",
   "main": "index.js",
   "scripts": {
