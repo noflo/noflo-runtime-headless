@@ -1,10 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, './webpack.entry.js'),
   output: {
-    path: __dirname,
-    filename: '../dist/noflo.js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'noflo.js',
   },
   module: {
     rules: [
@@ -42,9 +43,20 @@ module.exports = {
   },
   resolve: {
     extensions: ['.coffee', '.js'],
+    fallback: {
+      assert: false,
+      child_process: false,
+      constants: false,
+      fs: false,
+      os: false,
+      path: require.resolve('path-browserify'),
+      process: require.resolve('process'),
+      util: require.resolve('util/'),
+    },
   },
-  node: {
-    child_process: 'empty',
-    fs: 'empty',
-  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: ['process'],
+    }),
+  ],
 };

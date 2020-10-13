@@ -4,7 +4,7 @@
   "description": "Tool for running NoFlo browser runtimes on headless browser from CLI",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config spec/build/webpack.config.js",
+    "build": "noflo-cache-preheat && webpack --config spec/build/webpack.config.js",
     "pretest": "eslint src/*.js spec/**/*.js",
     "test": "fbp-spec --address ws://localhost:3569 --command \"./bin/noflo-runtime-headless -f spec/dist/noflo.js\" spec/*.yaml"
   },
@@ -31,6 +31,9 @@
     "noflo-component-loader": "^0.3.1",
     "noflo-core": "^0.6.1",
     "noflo-runtime-postmessage": "^0.11.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "util": "^0.12.3",
     "webpack": "^5.0.0",
     "webpack-cli": "^4.0.0"
   },
