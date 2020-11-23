@@ -1,6 +1,6 @@
 name: Node CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   test:
@@ -15,12 +15,10 @@ jobs:
       uses: actions/setup-node@v2.1.2
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and test
-      run: |
-        npm install
-        npx noflo-cache-preheat
-        npm run build
-        npm test
+    - run: npm install
+    - run: npx noflo-cache-preheat
+    - run: npm run build
+    - run: npm test
       env:
         CI: true
   merge-me:
