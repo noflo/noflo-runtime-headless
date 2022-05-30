@@ -38,7 +38,7 @@
     "webpack-cli": "^4.0.0"
   },
   "dependencies": {
-    "commander": "^6.1.0",
+    "commander": "^9.3.0",
     "debug": "^4.0.1",
     "koa": "^2.5.3",
     "koa-router": "^10.0.0",
