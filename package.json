@@ -23,7 +23,7 @@
   "homepage": "https://github.com/noflo/noflo-runtime-headless#readme",
   "devDependencies": {
     "coffee-loader": "^2.0.0",
-    "eslint": "^7.9.0",
+    "eslint": "^8.25.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.14.0",
     "fbp-spec": "^0.8.0",
